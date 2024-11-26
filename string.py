@@ -283,7 +283,18 @@ def longestrepeatingsubstring(s):
                 dp[i][j]=dp[i-1][j-1]+1 if i else 1
                 ans=max(ans,dp[i][j])
     return ans
-
+#24-replace all "?" to avoid consequative repeating charcter
+def modifystring(s):
+    n=len(s)
+    char_list=list(s)
+    for i in range(n):
+        if char_list[i]=="?":
+            for x in "abc":
+                if (i>0 and char_list[i-1]==c or i+1<n and char_list[i+1]==c):
+                    countine
+                char_list[i]=c
+                break
+    return "".join(char_list)
 
 
 
