@@ -283,7 +283,7 @@ def longestrepeatingsubstring(s):
                 dp[i][j]=dp[i-1][j-1]+1 if i else 1
                 ans=max(ans,dp[i][j])
     return ans
-#24-replace all "?" to avoid consequative repeating charcter
+#33-replace all "?" to avoid consequative repeating charcter
 def modifystring(s):
     n=len(s)
     char_list=list(s)
@@ -295,9 +295,102 @@ def modifystring(s):
                 char_list[i]=c
                 break
     return "".join(char_list)
+#34-longest increasing subsequence
+def longest_invreasing_subsequence(nums):
+    n=len(nums)
+    dp=[1]*n
+    for i in range(1,n):
+        for j in range(i):
+            if nums[i]>nums[j]:
+                dp[i]=max(dp[i],dp[i+1])
+    return max(dp)
 
+#35-longest repeated substring
+def longest_repeated_substring(s):
+    n=len(s)
+    dp=[[0]*n for _ in range(n)]
+    ans=0
+    for i in range(n):
+        for j in range(1+1,n):
+            if s[i]==s[j]:
+                dp[i][j]=dp[i-1][j-1]+1 if i else 0
+                ans=max(ans,dp[i][j])
+    return ans
 
+#36-max repeating substring
+def max_repeating_subsequence(sequence,word):
+    if len(subsequence)<len(word):return 0
+    ans,k=0,1
+    while word*k in sequence:
+        ans+=1
+        k+=1
+    return ans
 
+#37-count substring without repeating charcter
+def numberOfSpecialSubstrings(s):
+    count=0
+    for i in range(len(s)):
+        for j in range(i,len(s)):
+            substring=s[i:j+1]
+            if len(substring=len(set(substring)):
+                count+=1
+    return count
+#38-longest repeating subsequence
+def longest_repeating_subsequence(str):
+    memo=[[0 for j in range(len(str)+1)] for i in range(len(str)+1)]
+    for i in range(1,len(memo)):
+        for j in range(1,len(memo[0])):
+            if str[i-1]=str[j-1] and i!=j:
+                memo[i][j]=memo[i-1][j-1]+1
+            else:
+                memo[i][j]=max(memo[i][j-1],memo[i-1][j])
+    return memo[-1][-1]
+
+#39-longest uncommon subsequence
+def findluslength(a,b):
+    if a==b: return -1
+        return max(len(a),len(b))
+#40-multiply substring
+def multiply(nums1,nums2):
+    n1,n2=0,0
+    for i in nums1:
+        n1=n1*10+(ord(i)-48)
+    for i in nums2:
+        n2=n2*10+(ord(i)-48)
+    return n1*n2
+
+#41-return all substring frm given string
+def unique_substring(s):
+    substring=set()
+    for i in range(len(s)):
+        for j in range(i+1,len(s)+1)
+        substring.add(s[i:j])
+    return list(substring)
+
+#42-jewels and stone
+def numjewelsandstones(jewels,stones):
+    jeweles_set=set(jewels)
+    return sum(stone in jewelset for stone in stones)
+
+#43-ransome note
+def cancostrcut(ransomenote,magazine):
+    return (Counter(ransomenote)-Counter(magazine))=={}
+
+#44-isisomorphic
+def solution(x,y):
+    return [s.index(t) for x in s]==[t.index(y) for y in t]
+
+#45-rearrange space between words
+def record_spaces(text):
+    words=text.split()
+    spaces=text.count(" ")
+    if len(words)==1: 
+        return words[0]+" "*spaces
+    between,end=divmod(spaces,len(words)-1)
+    return (' '*between).join(words)+" "*end
+
+            
+            
 
 
 
