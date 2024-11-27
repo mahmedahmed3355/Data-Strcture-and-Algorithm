@@ -389,9 +389,115 @@ def record_spaces(text):
     between,end=divmod(spaces,len(words)-1)
     return (' '*between).join(words)+" "*end
 
-            
-            
+#46- rearrange charcter to make target string
+def rearrange_charcter(s,target):
+    s,target=Counter(s),Counter(target)
+    return min(s[e]//target[e] for e in target)
 
+
+#47-rearrange string so that no two adjcent charcter are same
+def regonizestring(s):
+    n,index,ans,char_list=len(s),0,[None]*n,Counter(s)
+    if(max(char_list.values()>((n+1)//2))): return " "
+    for char,val in char_list.most_common():
+        while char_list:
+            ans[index]=char
+            v-=1
+            index+=2
+            if index>=n:
+                index=1
+    return "".join(ans)
+
+#48-partition label
+def partitions_label(s):
+    last_occ={char:index for index,char in enumerate(s)}
+    partitions,start,end=[],0,0
+    for i,char in enumerate(s):
+        last_index=last_occ[char]
+        end=max(end,last_index)
+        if i==end:
+            partitions.append(i-start+1)
+            start=i+1
+    return partitions
+#49- filp string to monotone increasing
+def minfilpmonoincr(s):
+    flip_count,one_count=0,0
+    for i in range(len(s)):
+        if s[i]=="1":
+            one_count+=1
+        else:
+            flip_count=min(flip_count+1,one_count)
+    return flip_count
+#50-check balanced string
+def isbalanced(num):
+    odd,even=0,0
+    for i in range(len(nums)):
+        digit=int(num[i])
+        if i%2==0:
+            even+=digit
+        else:
+            odd+=digit
+    return even==odd
+
+
+
+##############################################################################################################################
+############################################################ palindrome ######################################################
+##############################################################################################################################
+#51-vaild palindrome
+def ispalindrome(s):
+    s=s.lower()
+    s="".join(filter(str.isalnum(),s))
+    return 1 if s-s[::-1] else 0
+
+#52-return true if string can be palindrome after delete at most one charcter
+def vaild_palindrome2(s):
+    if s==s[::-1]: return True
+    l,r=0,len(s)-1
+    while l<r:
+        if s[l]!=s[r]:
+            temp2=s[:r]+s[r+l:]
+            temp=s[:l]+s[l+1:]
+            return temp==temp[::-1] or temp2==temp2[::-1]
+        l+=1
+        r-=1
+#53-palindrome operations
+def solution(s):
+    l,r=0,len(s)-1
+    cnt=0
+    while l<r:
+        cnt+=s[i]!=s[j]
+        i,j=i+1,i-1
+    return cnt<=2
+
+#54-unique length 3 palindrome substring
+from itertools import ascii_lowercase
+def countuniquepalindrome(s):
+    count=0
+    for char in ascii_lowercase:
+        left_index=s.find(char)
+        rigth_index=s.rfind(char)
+        if rigth_index-left_index>1:
+            count+=len(set(s[left_index+1:right_index]))
+    return count
+#55-convert to plaindrome
+def slove(s):
+    l,r=0,len(s)-1
+    while l<r:
+        if s[l]==s[r]:
+            l+=1
+            r-=1
+        else:
+            if s[l+1:r+1]==a[l+1:r+1][::-1]:
+                return 1
+            if s[l:r]==s[l:r][::-1]:
+                return 1
+            return 0
+    return 1
+
+#56-can permautions make string palindrome
+def cnpermutepalindrome(s):
+    return sum(v%2 for v in Counter(s).values())<=1
 
 
 
