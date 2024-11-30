@@ -504,7 +504,7 @@ def maxcore(cardpoints,k):
     return max(dparray)
 
 #48-Maximum Erasure Value
-def maximumuniquesubarray(nums)
+def maximumuniquesubarray(nums):
     s,suml,start,m=set(),0,0,0
     for i in range(len(nums)):
         while nums[i] in s:
@@ -554,10 +554,197 @@ def findmaxconsequativeones(nums):
             count=0
     return max(max_count,count)
 
+#53-Equilibrium Point
+def findEquilibrium(self, arr):
+    #code
+    total_sum=sum(arr[1:])
+    left_sum=0
+    for i in range(1,len(arr)):
+        total_sum-=arr[i]
+        left_sum+=arr[i-1]
+        if total_sum==left_sum:
+            return i
+    return -1
+#####################################################################
+#54-find peak element
+def findPeakElement(self, nums: List[int]) -> int:
+    # Initialize the start and end pointers.
+    start, end = 0, len(nums) - 1
+    # Binary search to find the peak element.
+    while start < end:
+    # Find the middle index.
+        mid = (start + end) // 2
+        # If the middle element is greater than its next element,
+        # it means a peak element is on the left side(inclusive of mid).
+        if nums[mid] > nums[mid + 1]:
+            end = mid
+            # Otherwise, the peak is in the right half of the array.
+        else:
+            start = mid + 1
+        # When start and end pointers meet, we've found a peak element.
+    return start
 
+#55-minimum distance between two distinct charcter in the arr
+def minDist(self, arr, n, x, y):
+    if x not in arr or y not in arr:return -1
+    mn=float('inf')
+    for i in range(len(arr)):
+        if arr[i]==x:
+            for j in range(len(arr)):
+                if arr[j]==y:
+                    mn=min(mn,abs(i-j))
+    return mn
 
+#56-first and last occurance of element in the arr
+def firstAndLast(self, x, arr):
+    c=[]
+    for i in range(len(arr)):
+        if arr[i]==x:
+            c.append(i)
+        if len(c)>=1:
+            return c[0],c[-1]
+        else:
+            return [-1]
 
+#57-Form a palindrome
+#Given a string, find the minimum number of characters to be inserted to convert it to a palindrome.
+class Solution:
+    def countMin(self, s):
+        # code here
+        n = len(s)
+        dp = [[0] * (n + 1) for _ in range(n + 1)]
 
+        for i in range(n):
+            for j in range(n):
+                if s[i] == s[n - 1 - j]:
+                    dp[i + 1][j + 1] = dp[i][j] + 1
+                else:
+                    dp[i + 1][j + 1] = max(dp[i][j + 1], dp[i + 1][j])
 
+        return n - dp[n][n]
+    
 
+#58--Remove all continuous occurrences of ‘a’ and all occurrences of ‘b’
+'''
+Input: str = “abcddabcddddabbbaaaaaa”
+Output: acddacdddda
+‘abcddabcddddabbbaaaaaa’ will not result in ‘acddacddddaa’ because after removing the required occurrences, the string will become ‘acddacddddaa’ which will result in ‘acddacdddda’
 
+Input: str = “aacbccdbsssaba”
+Output: acccdsssa
+'''
+def removeOccurrences(str) :
+    # String to store the resultant string
+    res = ""
+    for i in range(len(str)) :
+        # If 'a' appeared more than once continuously
+        if (res) :
+            if (str[i] == 'a' and res[-1] == 'a') :
+                # Ignore the character
+                continue
+            # Ignore all 'b' characters
+            elif (str[i] == 'b') :
+                continue
+            else :
+                # Characters that will be included in the resultant string
+                res += str[i]
+        else :
+            if (str[i] == 'a' ) :
+                res += str[i]
+            # Ignore all 'b' characters
+            elif (str[i] == 'b') :
+                continue
+            else :
+                # Characters that will be included  in the resultant string
+                res += str[i]
+    return res
+
+#59--Best Time to Buy and Sell Stocks II
+def maxProfit(self, A):
+    sum = 0
+    n = len(A)
+    for i in range(1, n):
+        if A[i - 1] - A[i] < 0:
+            sum += (A[i] - A[i - 1])
+    return sum
+##############################################################################################
+#60-Intersection Of Sorted Arrays
+def intersect(self, A, B):
+    ans = []
+    i = 0
+    j = 0
+    while i < len(A) and j < len(B):
+        if A[i] == B[j]:
+            ans.append(A[i])
+            i += 1
+            j += 1
+        elif A[i] > B[j]:
+            j += 1
+        else:
+            i += 1
+    return ans
+############################################################################
+#61-remove duplicate from sorted array
+class Solution:
+    def removeDuplicates(self, nums):
+        if not nums:
+            return 0
+
+        unique_index = 1
+
+        for i in range(1, len(nums)):
+            if nums[i] != nums[i - 1]:
+                nums[unique_index] = nums[i]
+                unique_index += 1
+
+        return unique_index
+
+#62-#Find all pairs with a given sum
+'''
+Input: x = 9, arr1[] = [1, 2, 4, 5, 7], arr2[] = [5, 6, 3, 4, 8]
+Output:
+1 8
+4 5
+5 4
+Explanation: (1, 8), (4, 5), (5, 4) are the pairs which sum to 9.
+'''
+class Solution:
+    def allPairs(self, x, arr1, arr2):
+        pairs = []
+        seen = set(arr2)  # Store elements of arr2 in a set for fast lookup
+        for num1 in arr1:
+            complement = x - num1
+            if complement in seen:
+                pairs.append((num1, complement))
+
+            pairs.sort(key=lambda pair: pair[0])
+
+        return pairs
+
+#63-Longest repeating subsequence
+def LongestRepeatingSubsequence(self, str):
+   memo = [[0 for j in range(len(str)+1)]for i in range(len(str)+1)]
+   for i in range(1, len(memo)):
+      for j in range(1,len(memo[0])):
+          if str[i-1] == str[j-1] and i != j:
+              memo[i][j] = memo[i-1][j-1]+1
+          else:
+              memo[i][j] = max(memo[i][j-1],memo[i-1][j])
+   return memo[-1][-1]
+
+#64-longest subsequence with limit sum
+def answerQueries(self, nums: List[int], queries: List[int]) -> List[int]:
+    numsSorted = sorted(nums)
+    res = []
+    for q in queries:
+        total = 0
+        count = 0
+        for num in numsSorted:
+            total += num
+            count += 1
+            if total > q:
+                count -= 1
+                break
+        res.append(count)
+
+    return res
