@@ -555,7 +555,7 @@ def findmaxconsequativeones(nums):
     return max(max_count,count)
 
 #53-Equilibrium Point
-def findEquilibrium(self, arr):
+def findEquilibrium(arr):
     #code
     total_sum=sum(arr[1:])
     left_sum=0
@@ -567,7 +567,7 @@ def findEquilibrium(self, arr):
     return -1
 #####################################################################
 #54-find peak element
-def findPeakElement(self, nums: List[int]) -> int:
+def findPeakElement(nums):
     # Initialize the start and end pointers.
     start, end = 0, len(nums) - 1
     # Binary search to find the peak element.
@@ -585,7 +585,7 @@ def findPeakElement(self, nums: List[int]) -> int:
     return start
 
 #55-minimum distance between two distinct charcter in the arr
-def minDist(self, arr, n, x, y):
+def minDist(arr, n, x, y):
     if x not in arr or y not in arr:return -1
     mn=float('inf')
     for i in range(len(arr)):
@@ -596,7 +596,7 @@ def minDist(self, arr, n, x, y):
     return mn
 
 #56-first and last occurance of element in the arr
-def firstAndLast(self, x, arr):
+def firstAndLast(x, arr):
     c=[]
     for i in range(len(arr)):
         if arr[i]==x:
@@ -608,20 +608,18 @@ def firstAndLast(self, x, arr):
 
 #57-Form a palindrome
 #Given a string, find the minimum number of characters to be inserted to convert it to a palindrome.
-class Solution:
-    def countMin(self, s):
-        # code here
-        n = len(s)
-        dp = [[0] * (n + 1) for _ in range(n + 1)]
+def countMin(s):
+    n = len(s)
+    dp = [[0] * (n + 1) for _ in range(n + 1)]
 
-        for i in range(n):
-            for j in range(n):
-                if s[i] == s[n - 1 - j]:
-                    dp[i + 1][j + 1] = dp[i][j] + 1
-                else:
-                    dp[i + 1][j + 1] = max(dp[i][j + 1], dp[i + 1][j])
+    for i in range(n):
+        for j in range(n):
+            if s[i] == s[n - 1 - j]:
+                dp[i + 1][j + 1] = dp[i][j] + 1
+            else:
+                dp[i + 1][j + 1] = max(dp[i][j + 1], dp[i + 1][j])
 
-        return n - dp[n][n]
+    return n - dp[n][n]
     
 
 #58--Remove all continuous occurrences of ‘a’ and all occurrences of ‘b’
@@ -660,7 +658,7 @@ def removeOccurrences(str) :
     return res
 
 #59--Best Time to Buy and Sell Stocks II
-def maxProfit(self, A):
+def maxProfit(A):
     sum = 0
     n = len(A)
     for i in range(1, n):
@@ -669,7 +667,7 @@ def maxProfit(self, A):
     return sum
 ##############################################################################################
 #60-Intersection Of Sorted Arrays
-def intersect(self, A, B):
+def intersect(A, B):
     ans = []
     i = 0
     j = 0
@@ -685,19 +683,18 @@ def intersect(self, A, B):
     return ans
 ############################################################################
 #61-remove duplicate from sorted array
-class Solution:
-    def removeDuplicates(self, nums):
-        if not nums:
-            return 0
+def removeDuplicates(nums):
+    if not nums:
+        return 0
 
-        unique_index = 1
+    unique_index = 1
 
-        for i in range(1, len(nums)):
-            if nums[i] != nums[i - 1]:
-                nums[unique_index] = nums[i]
-                unique_index += 1
+    for i in range(1, len(nums)):
+        if nums[i] != nums[i - 1]:
+            nums[unique_index] = nums[i]
+            unique_index += 1
 
-        return unique_index
+    return unique_index
 
 #62-#Find all pairs with a given sum
 '''
@@ -708,21 +705,20 @@ Output:
 5 4
 Explanation: (1, 8), (4, 5), (5, 4) are the pairs which sum to 9.
 '''
-class Solution:
-    def allPairs(self, x, arr1, arr2):
-        pairs = []
-        seen = set(arr2)  # Store elements of arr2 in a set for fast lookup
-        for num1 in arr1:
-            complement = x - num1
-            if complement in seen:
-                pairs.append((num1, complement))
+def allPairs(x, arr1, arr2):
+    pairs = []
+    seen = set(arr2)  # Store elements of arr2 in a set for fast lookup
+    for num1 in arr1:
+        complement = x - num1
+        if complement in seen:
+            pairs.append((num1, complement))
 
-            pairs.sort(key=lambda pair: pair[0])
+        pairs.sort(key=lambda pair: pair[0])
 
-        return pairs
+    return pairs
 
 #63-Longest repeating subsequence
-def LongestRepeatingSubsequence(self, str):
+def LongestRepeatingSubsequence(str):
    memo = [[0 for j in range(len(str)+1)]for i in range(len(str)+1)]
    for i in range(1, len(memo)):
       for j in range(1,len(memo[0])):
@@ -733,7 +729,7 @@ def LongestRepeatingSubsequence(self, str):
    return memo[-1][-1]
 
 #64-longest subsequence with limit sum
-def answerQueries(self, nums: List[int], queries: List[int]) -> List[int]:
+def answerQueries(nums, queries):
     numsSorted = sorted(nums)
     res = []
     for q in queries:
@@ -748,3 +744,453 @@ def answerQueries(self, nums: List[int], queries: List[int]) -> List[int]:
         res.append(count)
 
     return res
+
+#65-#Pair with given sum in a sorted array
+'''
+Input: k = 8, arr[] = [1, 2, 3, 4, 5, 6, 7]
+Output: 3
+Explanation: There are 3 pairs which sum up to 8 : {1, 7}, {2, 6}, {3, 5}
+'''
+def countPair (self, k, arr) :
+    c=set()
+    s=0
+    for i in arr:
+        if k-i in c:
+            s+=1
+        c.add(i)
+    return s
+
+#66-twoSum should return indices of the two numbers such that they add up to the target
+def twoSum(A, B):
+    numMap = {}  # Using a dictionary for the hash map
+
+    for i in range(len(A)):
+        complement = B - A[i]
+        if complement in numMap:
+            return [numMap[complement], i + 1]
+        #Store the element only once in the dictionary to ensure the indices returned are the first and last occurrence.
+        if A[i] not in numMap:
+            numMap[A[i]] = i + 1
+
+    return []
+    
+#67-Jump Game                             ###################################
+'''
+Input: arr[] = {1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9}
+Output: 3
+Explanation:First jump from 1st element to 2nd element with value 3. From here we jump to 5th element with value 9,
+and from here we will jump to the last.
+'''
+class Solution(object):
+    def jump(self, nums):
+        # Initialize the jump count, the maximum reach, and the edge of the current range to 0.
+        jump_count = max_reach = last_reach = 0
+
+        # # Step 2: Iterate over the array except the last element.
+        for index, value in enumerate(nums[:-1]):
+            # Update the maximum reach with the furthest position we can get to from the current index.
+            max_reach = max(max_reach, index + value)
+
+            # If we have reached the furthest point to which we had jumped previously,
+            # Increment the jump count and update the last reached position to the current max_reach.
+            if last_reach == index:
+                jump_count += 1
+                last_reach = max_reach
+
+        # Return the minimum number of jumps needed to reach the end of the list.
+        return jump_count
+
+#################################################################################################
+#68-Jump Game ll       return True of False
+'''
+You are given an integer array nums. You are initially positioned at the array's first index,
+and each element in the array represents your maximum jump length at that position.
+Return true if you can reach the last index, or false otherwise.
+Example 1:
+
+Input: nums = [2,3,1,1,4]
+Output: true
+Explanation: Jump 1 step from index 0 to 1, then 3 steps to the last index.
+'''
+def can_jum(arr):
+    max_index=0
+    for i,v in enumerate(arr):
+        if i>max_index:return False
+        max_index=max(max_index,i+v)
+    return True
+
+#69-Array Leaders
+'''
+An element of the array is considered a leader if it is greater than all the elements on its right side or if it is equal to the maximum element
+on its right side. The rightmost element is always a leader.
+Examples
+Input: n = 6, arr[] = {16,17,4,3,5,2}
+Output: 17 5 2
+Explanation: Note that there is nothing greater on the right side of 17, 5 and, 2.
+'''
+def printLeaders(arr, n):
+    ans = []
+
+    # Last element of an array is always a leader,
+    # push into ans array.
+    max_elem = arr[n - 1]
+    ans.append(arr[n - 1])
+
+    # Start checking from the end whether a number is greater
+    # than max no. from right, hence leader.
+    for i in range(n - 2, -1, -1):
+        if arr[i] > max_elem:
+            ans.append(arr[i])
+            max_elem = arr[i]
+    return ans
+
+#70-check if array is sorted
+def is_sorted(arr):
+  for i in range(len(arr) - 1):
+    if arr[i] > arr[i + 1]:
+      return False
+  return True
+
+#71-Count Complete Subarrays in an Array
+'''
+A subarray is considered "complete" if it contains exactly the same distinct elements as are present in the entire array.
+To clarify, a subarray is a contiguous sequence of elements within the array.
+The main goal is to find the number of such unique complete subarrays.
+
+Input: nums = [1,3,1,2,2]
+Output: 4
+Explanation: The complete subarrays are the following: [1,3,1,2], [1,3,1,2,2], [3,1,2] and [3,1,2,2].
+'''
+def countCompleteSubarrays( nums):
+    cnt = len(set(nums))   #determine the total number of distinct elements in the entire array nums.
+    ans, n = 0, len(nums)   #0,5
+    for i in range(n):
+        s = set()
+        for x in nums[i:]:
+            s.add(x)
+            if len(s) == cnt:
+                ans += 1
+    return ans
+    
+#72move zeros to the end of the array
+def pushZerosToEnd(arr):
+    # Pointer to track the position for next non-zero element
+    count = 0
+    for i in range(0,len(arr)):
+        if arr[i]!=0:
+            arr[count],arr[i]=arr[i],arr[count]
+            count+=1
+#############################################################################
+#73-Rearrange array such that even positioned are greater than odd
+'''
+Input: N = 4, arr[] = {1, 2, 2, 1}
+Output: 1 2 1 2
+arr[i] >= arr[i-1], if i is even.
+arr[i] <= arr[i-1], if i is odd.
+'''
+def rearrange(arr):
+    N = len(arr)
+    for i in range(1, N):
+        # Check if the index is even (1-based) => i+1 is even
+        if (i + 1) % 2 == 0:
+            # Ensure arr[i] >= arr[i-1]
+            if arr[i] < arr[i - 1]:
+                arr[i], arr[i - 1] = arr[i - 1], arr[i]
+        else:
+            # Ensure arr[i] <= arr[i-1]
+            if arr[i] > arr[i - 1]:
+                arr[i], arr[i - 1] = arr[i - 1], arr[i]
+
+#74-Count the number of possible triangles
+def squared(arr):
+    squared=set()
+    for i in arr:
+        squared.add(arr[i]*arr[i])
+    for i in range(len(arr)):
+        for j in range(i+1,len(arr)):
+            if arr[i]*arr[i]+arr[j]*arr[j] in squared:
+                count+=1
+    return count
+
+#75-Remove Duplicates from Sorted Array II
+'''
+Given nums = [1,1,1,2,2,3],
+Your function should return length = 5, with the first five elements of nums being 1, 1, 2, 2 and 3 respectively.
+It doesn't matter what you leave beyond the returned length
+'''
+def removeDuplicates(nums):
+    if len(nums) <= 2:
+        return len(nums)
+    slow = 2
+    for fast in range(2, len(nums)):
+        if nums[fast] == nums[slow-1] and nums[fast] == nums[slow-2]:
+            continue
+        nums[slow] = nums[fast]
+        slow += 1
+
+    return slow
+
+#76-Reduce the array such that each element appears at most K times
+'''
+Input: arr[] = {1, 2, 2, 2, 3}, K = 2
+Output: {1, 2, 2, 3}
+Explanation:
+Remove 2 once, as it occurs more than 2 times.
+'''
+from collections import Counter
+def reduceArray(arr, n, K) :
+    freq=Counter(arr)
+    ans=[]
+    for i in range(n):
+        if freq[arr[i]]>=2:
+            freq[arr[i]]-=1
+            ans.append(arr[i])
+        if freq[arr[i]]==1:
+            freq[arr[i]]=0
+            ans.append(arr[i])
+    return ans
+
+#77-largest-element-in-an-array-after-merge-operations
+'''
+Example 1:
+Input: nums = [2,3,7,9,3]
+Output: 21
+Explanation: We can apply the following operations on the array:
+- Choose i = 0. The resulting array will be nums = [5,7,9,3].
+- Choose i = 1. The resulting array will be nums = [5,16,3].
+- Choose i = 0. The resulting array will be nums = [21,3].
+The largest element in the final array is 21. It can be shown that we cannot obtain a larger element.
+'''
+
+def maxArrayValue(nums):
+    # Loop through the array in reverse order except for the last element.
+    for i in range(len(nums) - 2, -1, -1):
+        # If the current element is less than or equal to the next one,
+        # modify the current element by adding the next element's value to it.
+        if nums[i] <= nums[i + 1]:
+            nums[i] += nums[i + 1]
+
+        # After modifying the array, return the maximum value in the array.
+    return max(nums)
+    
+#78-Make all Ones together by Shifting Ones.
+'''
+Input: 11011
+Output: 2
+Explanation:  In the first operation move ‘1’  at index 3 to index 2. Now the string becomes 11101.
+In the second operation move ‘1’ at index 4 to index 3. Now the string becomes 11110. Therefore, the answer is 2.
+'''
+def make_all_ones_together(s):
+    n=len(s)
+    count_one=s.count('1')
+    ans=0
+    left_one=0
+    for i in range(n):
+        if s[i]=='0':
+            ans+=min(count_one-left_one,left_one)
+        if s[i]=='1':
+            left_one+=1
+    return ans
+##############################################################################################
+#79-Find four elements a, b, c and d in an array such that a+b = c+d
+def find_pairs(nums):
+    pair_sums = {}
+    result = []
+    for i in range(len(nums)):
+        for j in range(i + 1, len(nums)):
+            sum_ij = nums[i] + nums[j]
+            if sum_ij in pair_sums:
+                result.append([pair_sums[sum_ij][0], pair_sums[sum_ij][1], nums[i], nums[j]])
+            else:
+                pair_sums[sum_ij] = [nums[i], nums[j]]
+    return result
+
+#80-Maximum distance between two occurrences of same element in array
+def max_distance(arr):
+    n=len(arr)
+    hashmap={}
+    max_distance=0
+    for i in range(n):
+        if arr[i] not in hashmap.keys():
+            hashmap[arr[i]]=i
+        else:
+            max_distance=max(max_distance,i-hashmap[arr[i]])
+    return max_distance
+#############################################################################################
+#81-Rearrange an array such that arr[i] = i
+'''
+Input : arr = {-1, -1, 6, 1, 9, 3, 2, -1, 4, -1}
+Output : [-1, 1, 2, 3, 4, -1, 6, -1, -1, 9]
+'''
+def fixArray(arr, n):
+    s=set() #-1,6,1,9,3,2,4
+    for i in range(len(arr)):
+        s.add(arr[i])
+    for i in s:
+        arr[i]=i    #-1,1,2,3,4,-1,6,-1,-
+    else:
+        arr[i]=-1
+    return arr
+
+#82- product of array except itself
+def productExceptSelf(nums):
+    n = len(nums)
+    postfix=[1]*n
+    prefix=[1]*n
+    result=[0]*n
+    for i in range(1,n):
+        prefix[i]=prefix[i-1]*nums[i-1]
+    for i in range(n-2,-1,-1):
+        postfix[i]=postfix[i+1]*nums[i+1]
+    for i in range(n):
+        result[i]=prefix[i]*postfix[i]
+    return result
+
+#83-Three Sum Smaller
+'''
+Problem Statement: Given an array of n integers nums and an integer target, find the number of index triplets i, j, k
+with 0 <= i < j < k < n that satisfy the condition nums[i] + nums[j] + nums[k] < target.
+'''
+def threeSumSmaller(nums, target):
+    ans,n=0,len(nums)
+    nums.sort()
+    for i in range(n-2):
+        l,r=i+1,n-1
+        while r<l:
+            curr_sum=nums[i]+nums[r]+nums[l]
+            if curr_sum<target:
+                ans+=r-l
+                l+=1
+            else:
+                r-=1
+    return ans
+######################################################################################
+#84-Two Sum I
+#Problem Statement: Given an array of integers nums and an integer target, return indices of the two numbers
+#such that they add up to target.
+
+def twoSum(nums, target):
+    hashmap={}
+    for i,num in enumerate(nums):
+        desired=target-num
+        if desired in hashmap:
+            return [hashmap[desired],i]
+        hashmap[num]=i
+    return []
+ ###################################################################################
+# 85-Two Sum Less Than K
+'''
+Problem Statement: Given an array nums of integers and integer k, return the maximum sum such that there exists
+i < j with nums[i] + nums[j] = sum and sum < k. If no i, j exist satisfying this equation, return -1.
+'''
+#Given an array A of integers and integer K, return the maximum S such that there exists i < j with A[i] + A[j] = S and S < K.
+#If no i, j exist satisfying this equation, return -1.
+
+def twoSumLessThanK(A, k):
+    seen=set()
+    for num in A:
+        if k-num in seen:
+            return num+(k-num)
+        seen.add(num)
+    return -1
+##################################################################################
+#86-Three Sum
+'''
+Problem Statement: Given an array and a value, return a triplet whose sum is equal to the given target otherwise return []
+'''
+def find_triplets(nums, target):
+    n=len(nums)
+    nums.sort()
+    for i in range(n):
+        r,l=i+1,n-1
+        while r<l:
+            curr_sum=nums[i]+nums[r]+nums[l]
+            if curr_sum==target:
+                return [nums[i],nums[r],nums[l]]
+            elif curr_sum>target:
+                l+1
+            else:
+                r-1
+    return []
+
+#######################################################################################
+#87-Three Sum Zero
+########################################
+def threeSum(nums):
+    n=len(nums)
+    nums.sort()
+    for i in range(n):
+        r,l=i+1,n-1
+        while r<l:
+            curr_sum=nums[i]+nums[l]+nums[r]
+            if curr_sum==0:return[nums[i],nums[r],nums[l]]
+            elif curr_sum>0:l+1
+            else:r-1
+    return []
+    
+#88- max consequitve one I  max consequative charcters
+from itertools import groupby
+'''
+Given a binary array nums, return the maximum number of consecutive 1's in the array.
+Input: nums = [1,1,0,1,1,1]
+Output: 3
+Explanation: The first two digits or the last three digits are consecutive 1s. The maximum number of consecutive 1s is 3.
+'''
+def findMaxConsecutiveOnes(nums):
+    return max((sum(g) for k, g in groupby(nums) if k == 1), default=0)
+
+
+#89-Maximum consecutive one’s (or zeros) in a binary array
+'''
+Given a binary array, find the count of a maximum number of consecutive 1s present in the array.
+'''
+def getMaxLength(arr, n):
+    # initialize count
+    count = 0
+    # initialize max
+    result = 0
+    for i in range(0, n):
+        # Reset count when 0 is found
+        if (arr[i] == 0):count = 0
+        # If 1 is found, increment count# and update result if count # becomes more.
+        else:
+            # increase count
+            count+= 1
+            result = max(result, count)
+    return result
+
+#90-first and last occurance of element in the arr
+def firstAndLast(self, x, arr):
+    c=[]
+    for i in range(len(arr)):
+        if arr[i]==x:
+            c.append(i)
+        if len(c)>=1:
+            return c[0],c[-1]
+        else:
+            return [-1]
+        
+
+#91-Pair With Given Difference
+'''
+Input 1:
+ A = [5, 10, 3, 2, 50, 80]  B = 78
+Input 2:A = [-10, 20]       B = 30
+Example Output
+Output 1: 1
+Output 2: 1
+'''
+def solve(A, B):
+    """
+    Given an array of integers A and an integer B, checks if there exists 2 numbers
+    in A whose sum or difference is B.
+    For example:
+    solve([5, 10, 3, 2, 50, 80], 78) == 1
+    solve([5, 10, 3, 2, 50, 80], 70) == 0
+    """
+    s = set()
+    for num in A:
+        if num + B in s or num - B in s:
+            return 1
+        s.add(num)
+    return 0
